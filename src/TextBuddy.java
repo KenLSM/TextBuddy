@@ -155,7 +155,7 @@ public class TextBuddy {
 		
 		for (int i = 0; i < usrTexts.size(); i++) {
 			if (usrTexts.get(i).contains(searchString)) {
-				msg += (i + 1) + ". " + usrTexts.get(i) + "\n";
+				msg += (i + 1) + ". " + usrTexts.get(i) + "\n";		// Pre-fix index and post-fix new line for formatting
 			}
 		}
 		return msg;
@@ -173,7 +173,7 @@ public class TextBuddy {
 	private static Vector<String> sortUsrText() {
 		Vector<String> sortedVector = new Vector<String>();
 		Object[] toSort = usrTexts.toArray();
-		Arrays.sort(toSort);
+		Arrays.sort(toSort);				// Sorted using natural ordering
 
 		for (Object o : toSort) {
 			sortedVector.add((String) o);
