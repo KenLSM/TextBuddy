@@ -6,22 +6,30 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
+import org.junit.Before;
 import org.junit.Test;
 
 public class CE1Testcase {
 	private static final String TEXTBUDDY_FILENAME = "filename.b";
 	private static BufferedReader brIn, brOut;
 	private TextBuddy mTB;
-	@Test
+	
+	@Before
+	public void resetState(){
+		mTB = new TextBuddy(TEXTBUDDY_FILENAME);
+		mTB.processUsrCommand("clear", "");
+	}
+	
+	
 	public void test() {
-		init();
 		runCaseAdd();
 		runCaseSort();
 		runCaseSearch();
 	}
 
-	private void runCaseSearch() {
-		mTB.processUsrCommand("clear", "");
+	@Test
+	public void runCaseSearch() {
+		
 		assertEquals("filename.b is empty", mTB.processUsrCommand("search", "a"));
 		
 		mTB.processUsrCommand("add", " aa");
@@ -36,18 +44,18 @@ public class CE1Testcase {
 		assertEquals("Specified string not found.", mTB.processUsrCommand("search", "d"));
 	}
 
-	private void runCaseAdd() {
-		mTB.processUsrCommand("clear", "");
+	@Test
+	public void runCaseAdd() {
 		assertEquals("Invalid command provided.", mTB.processUsrCommand("aad", ""));
 		assertEquals("added to filename.b: \"hello world\"", mTB.processUsrCommand("add"," hello world"));
 		assertEquals("added to filename.b: \"bye world\"", mTB.processUsrCommand("add"," bye world") );
-
+		assertEquals("1. hello world\n2. bye world\n", mTB.processUsrCommand("display", ""));
 		System.out.println("Case add complete without failure");
 	}
 
-	private void runCaseSort() {
+	@Test
+	public void runCaseSort() {
 
-		mTB.processUsrCommand("clear", "");
 		assertEquals("filename.b is empty", mTB.processUsrCommand("sort", ""));
 		
 		mTB.processUsrCommand("add"," aa");
@@ -60,12 +68,5 @@ public class CE1Testcase {
 		assertEquals("1. aa\n2. bb\n3. cc\n", mTB.processUsrCommand("sort", ""));
 	
 		System.out.println("Case sort complete without failure");
-	}
-	
-	private void init(){
-			
-			mTB = new TextBuddy(TEXTBUDDY_FILENAME);
-			
-
 	}
 }
