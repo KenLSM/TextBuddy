@@ -23,13 +23,17 @@ public class CE1Testcase {
 	private void runCaseSearch() {
 		mTB.processUsrCommand("clear", "");
 		assertEquals("filename.b is empty", mTB.processUsrCommand("search", "a"));
+		
 		mTB.processUsrCommand("add", " aa");
-		assertEquals("1. aa", mTB.processUsrCommand("search", "aa"));
-		assertEquals("1. a ba", mTB.processUsrCommand("search", "a"));
+		assertEquals("1. aa\n", mTB.processUsrCommand("search", "aa"));
+		assertEquals("1. aa\n", mTB.processUsrCommand("search", "a"));
+		
 		mTB.processUsrCommand("add", " ab");
 		mTB.processUsrCommand("add", " ac");
-		assertEquals("Specified string not found.", mTB.processUsrCommand("search", "a"));
-		assertEquals("3.", mTB.processUsrCommand("search", "ac"));
+		assertEquals("1. aa\n2. ab\n3. ac\n", mTB.processUsrCommand("search", "a"));
+		assertEquals("3. ac\n", mTB.processUsrCommand("search", "ac"));
+		assertEquals("3. ac\n", mTB.processUsrCommand("search", "c"));
+		assertEquals("Specified string not found.", mTB.processUsrCommand("search", "d"));
 	}
 
 	private void runCaseAdd() {

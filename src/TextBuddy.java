@@ -143,12 +143,16 @@ public class TextBuddy {
 		}else{
 			for(int i = 0; i < usrTexts.size(); i++){
 				if(usrTexts.get(i).contains(searchString)){
-					System.out.println("asdasdasd");
-					msg += (i + 1) + ". " + usrTexts.get(i);
+					msg += (i + 1) + ". " + usrTexts.get(i) + "\n";
 				}
 			}
+			if(msg.equals("")){
+				return "Specified string not found.";
+			}else{
+				return msg;
+			}
 		}
-		return "Specified string not found.";
+		
 	}
 
 	private static String sort() {
