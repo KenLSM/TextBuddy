@@ -42,6 +42,8 @@ public class CE1Testcase {
 		assertEquals("3. ac\n", mTB.processUsrCommand("search", "ac"));
 		assertEquals("3. ac\n", mTB.processUsrCommand("search", "c"));
 		assertEquals("Specified string not found.", mTB.processUsrCommand("search", "d"));
+		
+		assertEquals("No search field specified.", mTB.processUsrCommand("search", ""));
 	}
 
 	@Test

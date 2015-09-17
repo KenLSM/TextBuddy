@@ -137,6 +137,11 @@ public class TextBuddy {
 		searchString = searchString.trim();
 		String msg;
 
+		if(searchString.equals("")){
+			msg = "No search field specified.";
+			return msg;
+		}
+		
 		if (usrTexts.isEmpty() == false) {			// User text is not empty, we can do processing
 			msg = searchMatches(searchString);
 			
