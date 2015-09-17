@@ -1,19 +1,13 @@
 import static org.junit.Assert.*;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Scanner;
-
 import org.junit.Before;
 import org.junit.Test;
 
 public class CE2Testcase {
 	private static final String TEXTBUDDY_FILENAME = "filename.b";
-	private static BufferedReader brIn, brOut;
 	private TextBuddy mTB;
 	
+	@SuppressWarnings("static-access")
 	@Before
 	public void resetState(){
 		mTB = new TextBuddy(TEXTBUDDY_FILENAME);
@@ -27,6 +21,7 @@ public class CE2Testcase {
 		runCaseSearch();
 	}
 
+	@SuppressWarnings("static-access")
 	@Test
 	public void runCaseSearch() {
 		
@@ -46,6 +41,7 @@ public class CE2Testcase {
 		assertEquals("No search field specified.", mTB.processUsrCommand("search", ""));
 	}
 
+	@SuppressWarnings("static-access")
 	@Test
 	public void runCaseAdd() {
 		assertEquals("Invalid command provided.", mTB.processUsrCommand("aad", ""));
@@ -55,6 +51,7 @@ public class CE2Testcase {
 		System.out.println("Case add complete without failure");
 	}
 
+	@SuppressWarnings("static-access")
 	@Test
 	public void runCaseSort() {
 
