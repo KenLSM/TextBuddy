@@ -136,12 +136,16 @@ public class TextBuddy {
 	// User has to match complete string
 	private static String search(String searchString) {
 		searchString = searchString.trim();
+		String msg = "";
+		
 		if(usrTexts.isEmpty()){
 			return usrFileName + " is empty";
 		}else{
-			if(usrTexts.contains(searchString)){
-				int index = usrTexts.indexOf(searchString);
-				return (index + 1) + ". " + usrTexts.get(index);
+			for(int i = 0; i < usrTexts.size(); i++){
+				if(usrTexts.get(i).contains(searchString)){
+					System.out.println("asdasdasd");
+					msg += (i + 1) + ". " + usrTexts.get(i);
+				}
 			}
 		}
 		return "Specified string not found.";

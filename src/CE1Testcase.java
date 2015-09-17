@@ -22,21 +22,21 @@ public class CE1Testcase {
 
 	private void runCaseSearch() {
 		mTB.processUsrCommand("clear", "");
-		assertEquals(mTB.processUsrCommand("search", "a"), "filename.b is empty");
+		assertEquals("filename.b is empty", mTB.processUsrCommand("search", "a"));
 		mTB.processUsrCommand("add", " aa");
-		assertEquals(mTB.processUsrCommand("search", "aa"), "1. aa");
-		assertEquals(mTB.processUsrCommand("search", "a"), "Specified string not found.");
+		assertEquals("1. aa", mTB.processUsrCommand("search", "aa"));
+		assertEquals("1. a ba", mTB.processUsrCommand("search", "a"));
 		mTB.processUsrCommand("add", " ab");
 		mTB.processUsrCommand("add", " ac");
-		assertEquals(mTB.processUsrCommand("search", "a"), "Specified string not found.");
-		assertEquals(mTB.processUsrCommand("search", "ac"), "3. ac");
+		assertEquals("Specified string not found.", mTB.processUsrCommand("search", "a"));
+		assertEquals("3.", mTB.processUsrCommand("search", "ac"));
 	}
 
 	private void runCaseAdd() {
 		mTB.processUsrCommand("clear", "");
-		assertEquals(mTB.processUsrCommand("aad", ""), "Invalid command provided.");
-		assertEquals(mTB.processUsrCommand("add"," hello world"), "added to filename.b: \"hello world\"");
-		assertEquals(mTB.processUsrCommand("add"," bye world"), "added to filename.b: \"bye world\"");
+		assertEquals("Invalid command provided.", mTB.processUsrCommand("aad", ""));
+		assertEquals("added to filename.b: \"hello world\"", mTB.processUsrCommand("add"," hello world"));
+		assertEquals("added to filename.b: \"bye world\"", mTB.processUsrCommand("add"," bye world") );
 
 		System.out.println("Case add complete without failure");
 	}
@@ -44,16 +44,16 @@ public class CE1Testcase {
 	private void runCaseSort() {
 
 		mTB.processUsrCommand("clear", "");
-		assertEquals(mTB.processUsrCommand("sort", ""), "filename.b is empty");
+		assertEquals("filename.b is empty", mTB.processUsrCommand("sort", ""));
 		
 		mTB.processUsrCommand("add"," aa");
-		assertEquals(mTB.processUsrCommand("sort", ""), "1. aa\n");
+		assertEquals("1. aa\n", mTB.processUsrCommand("sort", ""));
 		
 		mTB.processUsrCommand("add"," cc");
-		assertEquals(mTB.processUsrCommand("sort", ""), "1. aa\n2. cc\n");
+		assertEquals("1. aa\n2. cc\n", mTB.processUsrCommand("sort", ""));
 		
 		mTB.processUsrCommand("add"," bb");
-		assertEquals(mTB.processUsrCommand("sort", ""), "1. aa\n2. bb\n3. cc\n");
+		assertEquals("1. aa\n2. bb\n3. cc\n", mTB.processUsrCommand("sort", ""));
 	
 		System.out.println("Case sort complete without failure");
 	}
