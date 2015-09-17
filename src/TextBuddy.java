@@ -35,7 +35,6 @@ public class TextBuddy {
 	private static Vector<String> usrTexts;
 	private static String usrFileName;
 	private static Scanner scanner = new Scanner(System.in);
-	private static final boolean DEBUG_MODE = false; // Future use
 
 	public static void main(String[] args) {
 		String fileName = args[0];
@@ -49,6 +48,11 @@ public class TextBuddy {
 		usrFileName = fileName;
 	}
 
+	/*
+	 * Data loading function
+	 * Data is formatted by the first line being the number of stored lines to read
+	 * and proceeds to read n amount of lines
+	 */
 	private void initDataSet(BufferedReader br) {
 		int noOfLines = 0;
 		try {
@@ -101,7 +105,7 @@ public class TextBuddy {
 			String feedback = "";
 			showMsg("command: ", false);
 			// read input
-			feedback = processUsrCommand(getUsrCommand(), scanner.nextLine());
+			feedback = processUsrCommand(getUsrCommand(), getLine());
 			showMsg(feedback);
 		}
 	}
@@ -116,7 +120,7 @@ public class TextBuddy {
 			return displayAll();
 
 		case "delete":
-			return removeAt();
+			return removeAt(data);
 
 		case "clear":
 			return removeAll();
@@ -126,8 +130,10 @@ public class TextBuddy {
 
 		case "sort":
 			return sort();
+			
 		case "search":
 			return search(data);
+			
 		default:
 			return "Invalid command provided.";
 		}
@@ -175,6 +181,11 @@ public class TextBuddy {
 		return msg;
 	}
 
+	/*
+	 * Sorting of Vector data type
+	 * Converts to Object array to utilize Java's Arrays.sort function
+	 * After sorting, re-add back the strings Vector data type
+	 */
 	private static Vector<String> sortUsrText() {
 		Vector<String> sortedVector = new Vector<String>();
 		Object[] toSort = usrTexts.toArray();
@@ -207,8 +218,9 @@ public class TextBuddy {
 		return str;
 	}
 
-	private static String removeAt() {
-		int pos = scanner.nextInt();
+	private static String removeAt(String input) {
+		input = input.trim();
+		int pos = Integer.parseInt(input);
 		String removedText = usrTexts.remove(pos - 1);
 		saveFile();
 		return String.format(DElETE_AT, usrFileName, removedText);
@@ -247,7 +259,10 @@ public class TextBuddy {
 		String str = scanner.next();
 		return str;
 	}
-
+	private String getLine(){
+		String str = scanner.nextLine();
+		return str;
+	}
 	private void displayWelcomeMsg() {
 		showMsg(String.format(WELCOME_MSG, usrFileName));
 	}
