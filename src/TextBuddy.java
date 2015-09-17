@@ -158,15 +158,22 @@ public class TextBuddy {
 	private static String sort() {
 		String msg = "";
 		
-		Object[] toSort = usrTexts.toArray();
-		Arrays.sort(toSort);
-		usrTexts = new Vector<String>();
-		for(Object o : toSort){
-			usrTexts.add((String)o);
-		}
+		usrTexts = sortUsrText();
 		
 		msg = displayAll();
 		return msg;
+	}
+
+	private static Vector<String> sortUsrText() {
+		
+		Vector<String>sortedVector = new Vector<String>();
+		Object[] toSort = usrTexts.toArray();
+		Arrays.sort(toSort);
+		
+		for(Object o : toSort){
+			sortedVector.add((String)o);
+		}
+		return sortedVector;
 	}
 
 	private static void saveFile() {
