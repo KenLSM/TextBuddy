@@ -123,7 +123,7 @@ public class TextBuddy {
 
 		case "exit":
 			return exitSystem();
-			
+
 		case "sort":
 			return sort();
 		case "search":
@@ -133,45 +133,50 @@ public class TextBuddy {
 		}
 	}
 
-	// User has to match complete string
 	private static String search(String searchString) {
 		searchString = searchString.trim();
+		String msg;
+
+		if (usrTexts.isEmpty() == false) {			// User text is not empty, we can do processing
+			msg = searchMatches(searchString);
+			
+			if (msg.equals("")) {					// Return is empty. No match found
+				msg = "Specified string not found.";
+			}
+			
+		} else {									// User text is empty
+			msg =  usrFileName + " is empty";
+		}
+		return msg;
+	}
+
+	private static String searchMatches(String searchString) {
 		String msg = "";
 		
-		if(usrTexts.isEmpty()){
-			return usrFileName + " is empty";
-		}else{
-			for(int i = 0; i < usrTexts.size(); i++){
-				if(usrTexts.get(i).contains(searchString)){
-					msg += (i + 1) + ". " + usrTexts.get(i) + "\n";
-				}
-			}
-			if(msg.equals("")){
-				return "Specified string not found.";
-			}else{
-				return msg;
+		for (int i = 0; i < usrTexts.size(); i++) {
+			if (usrTexts.get(i).contains(searchString)) {
+				msg += (i + 1) + ". " + usrTexts.get(i) + "\n";
 			}
 		}
-		
+		return msg;
 	}
 
 	private static String sort() {
 		String msg = "";
-		
+
 		usrTexts = sortUsrText();
-		
+
 		msg = displayAll();
 		return msg;
 	}
 
 	private static Vector<String> sortUsrText() {
-		
-		Vector<String>sortedVector = new Vector<String>();
+		Vector<String> sortedVector = new Vector<String>();
 		Object[] toSort = usrTexts.toArray();
 		Arrays.sort(toSort);
-		
-		for(Object o : toSort){
-			sortedVector.add((String)o);
+
+		for (Object o : toSort) {
+			sortedVector.add((String) o);
 		}
 		return sortedVector;
 	}
@@ -191,7 +196,7 @@ public class TextBuddy {
 	}
 
 	private static String addToVector(String input) {
-		//String str = scanner.nextLine().trim();
+		// String str = scanner.nextLine().trim();
 		String str = input.trim();
 		usrTexts.add(str);
 		return str;
